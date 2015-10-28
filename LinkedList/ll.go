@@ -8,10 +8,6 @@ type Node struct{
 }
 
 func add_node (root *Node, nval int){
-	if root.val == nil{
-		root.val = nval
-		return
-	}
 	var tmp = root
 	n := Node {nval, nil}
 	for tmp.next != nil{
@@ -23,7 +19,7 @@ func add_node (root *Node, nval int){
 }
 func print_list(root *Node){
 	var tmp = root
-	for tmp.next != nil{
+	for tmp != nil{
 		fmt.Print(tmp.val, " --> ")
 		tmp = tmp.next
 	}
@@ -33,25 +29,30 @@ func print_list(root *Node){
 
 
 func main (){
-	root := Node{}
+	var root *Node
 	var option int
 	var input int
-//	fmt.Print("Please enter a number to enter into the list: ")
-//	fmt.Scanln(&input);
-//	root.val = input
-//	root.next = nil
+
 	option = 0
+
 	for true{
+
 		if option == 1{
+			
 			fmt.Print("Please enter a number to enter into the list: ")
 			fmt.Scanln(&input);
-			add_node(&root, input)
+			
+			if root == nil{
+				root = &Node{input, nil}
+			}else{
+				add_node(root, input)
+			}
 		
 		} else if option == 2{
-			print_list(&root)
+			print_list(root)
 		
 		} else if option == 3{
-			//remove number from list
+			//TODO remove number from list
 		
 		} 
 
