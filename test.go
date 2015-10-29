@@ -8,10 +8,9 @@ type num struct {
 }
 
 func initialize(n **num) {
-	var tmp *num
-	tmp = *n
-	tmp = tmp.next
-	fmt.Println("this works", tmp.x)
+	tmp := n
+	*tmp = (*tmp).next
+	fmt.Println("this works", (*tmp).x)
 }
 
 func main() {
