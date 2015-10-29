@@ -11,13 +11,13 @@ func initialize(n **num) {
 	//	n = num{}
 	//n.x = 5
 	//n.y = 4
-	var tmp **num
+	var tmp *num
 	//tmp := &num{}
-	tmp = n
+	tmp = *n
 	//_ = tmp
 	//**n = *n.next
-	*tmp = *tmp.next
-	//fmt.Println("this works", *tmp.x)
+	tmp = tmp.next
+	fmt.Println("this works", tmp.x)
 }
 
 func main() {
