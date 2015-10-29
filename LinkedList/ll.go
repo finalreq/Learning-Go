@@ -33,19 +33,44 @@ func print_list(root *Node) {
 }
 
 func remove_node(root **Node, val int) {
-	var cur = root.next
-	var prev = **root
+	//This first if case works
+	if (*root).next == nil { //If there is only one element in the list
+		if (*root).val == val {
+			(*root) = nil
+			return
+		} else {
+			fmt.Println("Number is not in the list")
+			return
+		}
+	}
+
+	cur := (*root).next
+	tmp := (*root)
+	prev := root
+	_ = tmp
 	for cur.val != val {
-		if cur.next == nil {
+		fmt.Println("loop")
+		if (*cur).next == nil && (*cur).val != val { // if at the end of the list
 			fmt.Println("value does not exist in the list")
+			return
+		} else if (*cur).next == nil && (*cur).val == val {
+			(*prev).next = nil
 			return
 		}
 		cur = cur.next
-		prev = *prev.next
+		//fmt.Println("We get here")
+		*prev = (*prev).next
+		//fmt.Println("we go there", (*prev).val)
 	}
-	prev.next = cur.next
-	prev = cur.next
-	cur = cur.next.next
+
+	(*prev).next = cur.next
+	*prev = cur.next
+	(*root) = tmp
+	if cur.next == nil {
+		return
+	} else {
+		cur = cur.next.next
+	}
 }
 
 func main() {
