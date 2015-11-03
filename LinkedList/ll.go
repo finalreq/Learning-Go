@@ -74,6 +74,21 @@ func remove_node(root **Node, val int) {
 	*root = tmp
 }
 
+func find_node(root *Node, val int) {
+	count := 0
+	for root != nil {
+		if root.val == val {
+			count++
+		}
+		root = root.next
+	}
+	if count > 0 {
+		fmt.Println("\nThere are ", count, " occurences of value ", val, " in the list\n")
+	} else {
+		fmt.Println("\nValue ", val, " does not exist in the list\n")
+	}
+}
+
 func main() {
 	var root *Node
 	var option int
@@ -101,11 +116,14 @@ func main() {
 			fmt.Print("Please enter the number to be removed: ")
 			fmt.Scanln(&input)
 			remove_node(&root, input)
-			//TODO remove number from list
 
+		} else if option == 4 {
+			fmt.Print("Please enter the number you are looking for ")
+			fmt.Scanln(&input)
+			find_node(root, input)
 		}
 
-		fmt.Printf("1 ........ add new number \n2 ........ print the list \n3 ........ remove from the list \n")
+		fmt.Printf("1 ........ add new number \n2 ........ print the list \n3 ........ remove from the list \n4 ........ Find the number of occurences of a value in the list\n")
 
 		fmt.Print("Please enter a new command: ")
 		fmt.Scanln(&option)
