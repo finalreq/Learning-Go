@@ -48,8 +48,17 @@ func remove_node(root **Node, val int) {
 	tmp := (*root)
 	prev := root
 	_ = tmp
-	for cur.val != val {
-		fmt.Println("loop")
+	for cur != nil { //just check cur instead of cur.next
+		if (*prev).val == val {
+			(*root) = (*prev).next
+			*prev = (*prev).next
+			cur = cur.next
+			continue
+		}
+		if (*cur).val == val {
+			(*prev).next
+		}
+		//fmt.Println("loop")
 		if (*cur).next == nil && (*cur).val != val { // if at the end of the list
 			fmt.Println("value does not exist in the list")
 			return
