@@ -10,19 +10,43 @@ type Node struct {
 	left  *Node
 }
 
-func add_node(root Node, input int) {
+func add_node(root *Node, input int) {
+
+	if input > root.val {
+		if root.right == nil {
+			root.right = &Node{input, nil, nil}
+			return
+		}
+		add_node(root.right, input)
+
+	} else if input < root.val {
+		if root.left == nil {
+			root.left = &Node{input, nil, nil}
+			return
+		}
+		add_node(root.left, input)
+	} else {
+		fmt.Println("Value is already in the tree!")
+		return
+	}
 
 }
 
-func print_inorder(root Node) {
+func print_inorder(root *Node) {
+	tmp := root
+	if tmp == nil {
+		return
+	}
+	print_inorder(root.left)
+	fmt.Printf("%d ", root.val)
+	print_inorder(root.right)
+}
+
+func remove_node(root **Node, input int) {
 
 }
 
-func remove_node(root *Node, input int) {
-
-}
-
-func find_node(root Node) {
+func find_node(root *Node) {
 
 }
 
@@ -40,19 +64,20 @@ func main() {
 			if root == nil {
 				root = &Node{input, nil, nil}
 			} else {
-				add_node(*root, input)
+				add_node(root, input)
 			}
 		} else if option == 2 {
 			//for now only do in order, will add more later
-			print_inorder(*root)
+			print_inorder(root)
+			fmt.Printf("\n")
 		} else if option == 3 {
 			fmt.Print("Please enter the number you want to remove from the tree")
 			fmt.Scanln(&input)
-			remove_node(root, input)
+			remove_node(&root, input)
 		} else if option == 4 {
 			fmt.Print("Pleaase enter the number you want to search the tree for: ")
 			fmt.Scanln(&input)
-			find_node(*root)
+			find_node(root)
 		}
 	}
 
