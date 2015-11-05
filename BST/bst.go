@@ -10,23 +10,50 @@ type Node struct {
 	left  *Node
 }
 
-func print_menu() {
-	option := 0
-	var input int
+func add_node(root Node, input int) {
 
-	if option == 1 {
-	}
+}
+
+func print_inorder(root Node) {
+
+}
+
+func remove_node(root *Node, input int) {
+
+}
+
+func find_node(root Node) {
+
 }
 
 func main() {
-	root * Node
+	var root *Node
 	var option int
 	var input int
 
 	for true {
-
-		print_menu()
-
+		fmt.Printf("1 ........ add new number\n2 ........ print the tree in order\n3 ........ remove from the tree\n4 ........ Find the number in the tree\n")
+		fmt.Scanln(&option)
+		if option == 1 {
+			fmt.Print("Please enter a number to be entered into the list: ")
+			fmt.Scanln(&input)
+			if root == nil {
+				root = &Node{input, nil, nil}
+			} else {
+				add_node(*root, input)
+			}
+		} else if option == 2 {
+			//for now only do in order, will add more later
+			print_inorder(*root)
+		} else if option == 3 {
+			fmt.Print("Please enter the number you want to remove from the tree")
+			fmt.Scanln(&input)
+			remove_node(root, input)
+		} else if option == 4 {
+			fmt.Print("Pleaase enter the number you want to search the tree for: ")
+			fmt.Scanln(&input)
+			find_node(*root)
+		}
 	}
 
 	fmt.Println("Hello World!")
