@@ -46,15 +46,25 @@ func remove_node(root **Node, input int) {
 
 }
 
-func find_node(root *Node) {
-
+func find_node(root *Node, val int) bool {
+	if root == nil {
+		return false
+	}
+	if root.val == val {
+		return true
+	}
+	if root.val > val {
+		return find_node(root.left, val)
+	} else {
+		return find_node(root.right, val)
+	}
 }
 
 func main() {
 	var root *Node
 	var option int
 	var input int
-
+	var found bool
 	for true {
 		fmt.Printf("1 ........ add new number\n2 ........ print the tree in order\n3 ........ remove from the tree\n4 ........ Find the number in the tree\n")
 		fmt.Scanln(&option)
@@ -77,7 +87,12 @@ func main() {
 		} else if option == 4 {
 			fmt.Print("Pleaase enter the number you want to search the tree for: ")
 			fmt.Scanln(&input)
-			find_node(root)
+			found = find_node(root, input)
+			if found == true {
+				fmt.Println("The value exists in the tree")
+			} else {
+				fmt.Println("The value does not exist in the tree")
+			}
 		}
 	}
 
